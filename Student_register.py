@@ -2,7 +2,7 @@
 
 Descripción: Este proyecto consiste en desarrollar una aplicación que permita registrar, consultar, actualizar y eliminar información de estudiantes. Cada estudiante tendrá datos básicos como nombre completo, fecha de nacimiento, matrícula, correo electrónico y carrera. Toda la información será almacenada en una base de datos relacional (por ejemplo, MySQL, PostgreSQL o SQL Server). El sistema debe garantizar la integridad de los datos, ofrecer una interfaz sencilla (tipo consola o web básica) y permitir búsquedas por diferentes criterios (por matrícula, nombre, etc.). También se incluirá validación de datos al momento de registrar o actualizar estudiantes.
 
-Objetivos principales:P
+Objetivos principales:
 - Crear la estructura de la base de datos (tablas, relaciones, restricciones).
 - Desarrollar la lógica para operaciones CRUD (Crear, Leer, Actualizar, Eliminar).
 - Implementar una interfaz amigable para interactuar con el sistema.
@@ -13,7 +13,6 @@ import pyodbc
 
 app = Flask(__name__)
 
-# Función para conectarse a la base de datos
 def get_connection():
     return pyodbc.connect(
         r'DRIVER={ODBC Driver 17 for SQL Server};'
@@ -22,7 +21,6 @@ def get_connection():
         r'Trusted_Connection=yes;'
     )
 
-# Ruta principal para mostrar los estudiantes
 @app.route('/')
 def mostrar_estudiantes():
     cnxn = get_connection()
@@ -31,7 +29,6 @@ def mostrar_estudiantes():
     estudiantes = cursor.fetchall()
     cnxn.close()
 
-    # Plantilla HTML básica
     html = '''
     <!DOCTYPE html>
     <html>
