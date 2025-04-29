@@ -8,7 +8,7 @@ Objetivos principales:
 - Implementar una interfaz amigable para interactuar con el sistema.
 - Asegurar que los datos se validen correctamente antes de ser almacenados."""
 
-from flask import Flask, render_template_string
+from flask import Flask, render_template
 import pyodbc
 
 app = Flask(__name__)
@@ -29,47 +29,11 @@ def mostrar_estudiantes():
     estudiantes = cursor.fetchall()
     cnxn.close()
 
-    html = '''
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Registro de Estudiantes</title>
-        <style>
-            body { font-family: Arial, sans-serif; margin: 40px; }
-            table { border-collapse: collapse; width: 80%; margin: auto; }
-            th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
-            th { background-color: #4CAF50; color: white; }
-            tr:nth-child(even) { background-color: #f2f2f2; }
-        </style>
-    </head>
-    <body>
-        <h2 style="text-align:center;">Lista de Estudiantes</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Fecha de Nacimiento</th>
-                    <th>Matrícula</th>
-                    <th>Correo</th>
-                    <th>Carrera</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for estudiante in estudiantes %}
-                <tr>
-                    <td>{{ estudiante[0] }}</td>
-                    <td>{{ estudiante[1] }}</td>
-                    <td>{{ estudiante[2] }}</td>
-                    <td>{{ estudiante[3] }}</td>
-                    <td>{{ estudiante[4] }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </body>
-    </html>
-    '''
-    return render_template_string(html, estudiantes=estudiantes)
+    return render_template('index.html', estudiantes=estudiantes)
+
+@app.route('/insert.html')
+def insert():
+    return render_template('insert.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

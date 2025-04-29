@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Student</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0; 
+        }
+
+        body {
+            background-color: aliceblue;
+        }
+
+        form {
+            width: 50%;
+        }
+
+    </style>
+</head>
+<body>
+    <h2>Student Registration Form</h2>
+    <form action="procesar.php" method="POST">
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Nombre</span>
+            </div>
+            <input type="text" id="nameInput" name="myInput" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+        </div>
+
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Nacimiento</span>
+            </div>
+            <input type="date" id="dateInput" name="myInput" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+        </div>
+
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Matricula</span>
+            </div>
+            <input type="text" id="matrInput" name="myInput" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+        </div>
+
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Correo</span>
+            </div>
+            <input type="text" id="emailInput" name="myInput" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+        </div>
+
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Carrera</span>
+            </div>
+            <input type="text" id="careerInput" name="myInput" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+        </div>
+    </form>
+</body>
+</html>
