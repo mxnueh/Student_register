@@ -1,13 +1,3 @@
-""" Nombre del proyecto: Sistema de Registro de Estudiantes
-
-Descripción: Este proyecto consiste en desarrollar una aplicación que permita registrar, consultar, actualizar y eliminar información de estudiantes. Cada estudiante tendrá datos básicos como nombre completo, fecha de nacimiento, matrícula, correo electrónico y carrera. Toda la información será almacenada en una base de datos relacional (por ejemplo, MySQL, PostgreSQL o SQL Server). El sistema debe garantizar la integridad de los datos, ofrecer una interfaz sencilla (tipo consola o web básica) y permitir búsquedas por diferentes criterios (por matrícula, nombre, etc.). También se incluirá validación de datos al momento de registrar o actualizar estudiantes.
-
-Objetivos principales:
-- Crear la estructura de la base de datos (tablas, relaciones, restricciones).
-- Desarrollar la lógica para operaciones CRUD (Crear, Leer, Actualizar, Eliminar).
-- Implementar una interfaz amigable para interactuar con el sistema.
-- Asegurar que los datos se validen correctamente antes de ser almacenados."""
-
 from flask import Flask, render_template, request, redirect
 import pyodbc
 
@@ -25,33 +15,70 @@ def get_connection():
 def mostrar_estudiantes():
     cnxn = get_connection()
     cursor = cnxn.cursor()
-    cursor.execute("SELECT nombre, fecha_nacimiento, matricula, correo, carrera FROM Estudiantes")
+    cursor.execute("SELECT id, nombre, fecha_nacimiento, matricula, correo, carrera FROM Estudiantes")
     estudiantes = cursor.fetchall()
     cnxn.close()
 
     return render_template('index.html', estudiantes=estudiantes)
 
-@app.route('/insert.html', methods=["GET", "POST"])
-def insert():
-    if request.method == "POST":
-        nombre = request.form['myName']
-        fecha_nacimiento = request.form['myDate']
-        matricula = request.form['myMatr']
-        correo = request.form['myEmail']
-        carrera = request.form['myCareer']
-            
-        cnxn = get_connection()
-        cursor = cnxn.cursor()
-        
+@app.route('/delete/<int:id>', methods=["POST"])
+def delete(id): 
+    cnxn = get_connection()
+    cursor = cnxn.cursor()
+    cursor.execute("DELETE FROM Estudiantes WHERE id = ?", (id,))  
+    cnxn.commit()
+    cnxn.close()
 
-        cursor.execute("INSERT INTO Estudiantes (nombre, fecha_nacimiento, matricula, correo, carrera) VALUES (?, ?, ?, ?, ?)", (nombre, fecha_nacimiento, matricula, correo, carrera))
-        cnxn.commit()
-        cnxn.close()
+    return redirect('/') 
 
-        return redirect('/') 
+@app.route('/edit/<int:id>', methods=["GET"])  
+def edit(id):
+    cnxn = get_connection()
+    cursor = cnxn.cursor()
+    cursor.execute("SELECT id, nombre, fecha_nacimiento, matricula, correo, carrera FROM Estudiantes WHERE id = ?", (id,))  # Corregido: se agregó coma
+    estudiante = cursor.fetchone()
+    cnxn.close()
     
+    return render_template('update.html', estudiante=estudiante)
+
+@app.route('/update/<int:id>', methods=["POST"])
+def update(id):
+    nombre = request.form['myName']
+    fecha_nacimiento = request.form['myDate']
+    matricula = request.form['myMatr']
+    correo = request.form['myEmail']
+    carrera = request.form['myCareer']
+    
+    cnxn = get_connection()
+    cursor = cnxn.cursor()
+    cursor.execute("UPDATE Estudiantes SET nombre = ?, fecha_nacimiento = ?, matricula = ?, correo = ?, carrera = ? WHERE id = ?", 
+                  (nombre, fecha_nacimiento, matricula, correo, carrera, id))
+    cnxn.commit()
+    cnxn.close()
+    
+    return redirect('/')
+
+@app.route('/insert', methods=["GET"])  
+def show_insert_form():
     return render_template('insert.html')
+
+@app.route('/insert', methods=["POST"])  
+def insert():
+    nombre = request.form['myName']
+    fecha_nacimiento = request.form['myDate']
+    matricula = request.form['myMatr']
+    correo = request.form['myEmail']
+    carrera = request.form['myCareer']
+        
+    cnxn = get_connection()
+    cursor = cnxn.cursor()
+    
+    cursor.execute("INSERT INTO Estudiantes (nombre, fecha_nacimiento, matricula, correo, carrera) VALUES (?, ?, ?, ?, ?)", 
+                  (nombre, fecha_nacimiento, matricula, correo, carrera))
+    cnxn.commit()
+    cnxn.close()
+
+    return redirect('/') 
 
 if __name__ == '__main__':
     app.run(debug=True)
-

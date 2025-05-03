@@ -3,48 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Student</title>
+    <title>Update Student</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container mt-5">
-        <h2>Agregar Estudiante</h2>
-        <form action="/insert" method="POST">
+        <h2>Actualizar Estudiante</h2>
+        <form action="/update/{{estudiante[0]}}" method="POST">
             <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-sm">Nombre</span>
                 </div>
-                <input type="text" id="nameInput" name="myName" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required>
+                <input type="text" value="{{estudiante[1]}}" id="nameInput" name="myName" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
 
             <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-sm">Nacimiento</span>
                 </div>
-                <input type="date" id="dateInput" name="myDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required>
+                <input type="date" value="{{estudiante[2]}}" id="dateInput" name="myDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
 
             <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-sm">Matricula</span>
                 </div>
-                <input type="text" id="matrInput" name="myMatr" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required>
+                <input type="text" value="{{estudiante[3]}}" id="matrInput" name="myMatr" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
 
             <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-sm">Correo</span>
                 </div>
-                <input type="email" id="emailInput" name="myEmail" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required>
+                <input type="text" value="{{estudiante[4]}}" id="emailInput" name="myEmail" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
 
             <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-sm">Carrera</span>
                 </div>
-                <input type="text" id="careerInput" name="myCareer" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required>
+                <input type="text" value="{{estudiante[5]}}" id="careerInput" name="myCareer" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
-            <button type="submit" class="btn btn-success">Guardar</button>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
         </form>
         <div class="mt-3">
             <a href="/" class="btn btn-secondary">Volver</a>
