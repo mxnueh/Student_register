@@ -23,41 +23,43 @@
 </head>
 <body>
     <h2>Student Registration Form</h2>
-    <form action="procesar.php" method="POST">
+    <form action="/insert.html" method="POST">
         <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing-sm">Nombre</span>
             </div>
-            <input type="text" id="nameInput" name="myInput" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+            <input type="text" id="nameInput" name="myName" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
         </div>
 
         <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing-sm">Nacimiento</span>
             </div>
-            <input type="date" id="dateInput" name="myInput" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+            <input type="date" id="dateInput" name="myDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
         </div>
 
         <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing-sm">Matricula</span>
             </div>
-            <input type="text" id="matrInput" name="myInput" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+            <input type="text" id="matrInput" name="myMatr" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
         </div>
 
         <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing-sm">Correo</span>
             </div>
-            <input type="text" id="emailInput" name="myInput" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+            <input type="text" id="emailInput" name="myEmail" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
         </div>
 
         <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing-sm">Carrera</span>
             </div>
-            <input type="text" id="careerInput" name="myInput" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+            <input type="text" id="careerInput" name="myCareer" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
         </div>
+        <input type="submit" value="Crear">
+        <p>{{ thisGet}}</p>
     </form>
 </body>
 </html>

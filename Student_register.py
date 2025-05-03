@@ -8,7 +8,7 @@ Objetivos principales:
 - Implementar una interfaz amigable para interactuar con el sistema.
 - Asegurar que los datos se validen correctamente antes de ser almacenados."""
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 import pyodbc
 
 app = Flask(__name__)
@@ -31,8 +31,25 @@ def mostrar_estudiantes():
 
     return render_template('index.html', estudiantes=estudiantes)
 
-@app.route('/insert.html')
+@app.route('/insert.html', methods=["GET", "POST"])
 def insert():
+    if request.method == "POST":
+        nombre = request.form['myName']
+        fecha_nacimiento = request.form['myDate']
+        matricula = request.form['myMatr']
+        correo = request.form['myEmail']
+        carrera = request.form['myCareer']
+            
+        cnxn = get_connection()
+        cursor = cnxn.cursor()
+        
+
+        cursor.execute("INSERT INTO Estudiantes (nombre, fecha_nacimiento, matricula, correo, carrera) VALUES (?, ?, ?, ?, ?)", (nombre, fecha_nacimiento, matricula, correo, carrera))
+        cnxn.commit()
+        cnxn.close()
+
+        return redirect('/') 
+    
     return render_template('insert.html')
 
 if __name__ == '__main__':
