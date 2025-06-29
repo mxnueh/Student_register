@@ -8,7 +8,7 @@ def get_connection():
         r'DRIVER={ODBC Driver 17 for SQL Server};'
         r'SERVER=DESKTOP-EK6KQLL\MSSQLSERVER_2022;'
         r'DATABASE=Students;'
-        r'Trusted_Connection=yes;'
+        r'Trusted_Connection=yes;' 
     )
 
 @app.route('/')
